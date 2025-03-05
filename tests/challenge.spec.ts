@@ -57,28 +57,6 @@ test('Add a Form Builder, change BG color and validate', async ({ page }) => {
   await page2.bringToFront();
   await page2.goto(getURL);
   await expect(page2.getByRole('heading', { name: 'My Custom Form' })).toBeVisible();
-  // await expect(page2.locator('#appView')).toMatchAriaSnapshot(`
-  //   - heading "My Custom Form" [level=2]
-  //   - text: Email Address
-  //   - textbox "Email Address"
-  //   - text: Select One
-  //   - paragraph: "- Select -"
-  //   - list:
-  //   - listitem: Option 1
-  //   - listitem: Option 2
-  //   - listitem: Option 3
-  //   - text: Tell Us About Yourself
-  //   - textbox "Enter Text"
-  //   - group:
-  //   - text: Pick Your Favorite
-  //   - radio "Option A"
-  //   - text: Option A
-  //   - radio "Option B"
-  //   - text: Option B
-  //   - radio "Option C"
-  //   - text: Option C
-  //   - button "Submit"
-  //   `);
   await expect(page2.locator('#appView')).toBeVisible();
   await expect(page2.locator('div.formBuilder.formBuilder-v2.formElementsModule.js-form-container.enter_ani_none.none')).toHaveCSS('background-color', 'rgb(227, 242, 253)')
   await expect(page2.getByText('My Custom Form Email Address')).toBeVisible();
