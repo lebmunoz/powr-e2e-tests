@@ -1,6 +1,12 @@
-import { test as setup, expect } from '@playwright/test';
+import { test as setup, expect, Browser, Page } from '@playwright/test';
+import { chromium } from 'playwright-extra';
+import StealthPlugin from "puppeteer-extra-plugin-stealth"
 
-setup('setup login auth data', async ({ page }) => {
+setup('setup login auth data', async ({}) => {
+  const browser: Browser = await chromium.use(StealthPlugin()).launch();
+  const context = await browser.newContext();
+  const page: Page = await context.newPage();
+  
   await page.goto('https://www.powr.io/signin');
   await page.locator('#sign_in_email').click();
   await page.locator('#sign_in_email').fill(process.env.USER as string);
