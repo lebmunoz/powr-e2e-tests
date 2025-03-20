@@ -3,16 +3,19 @@
   "version": "1.0.0",
   "description": "E2E tests for POWR.io using Playwright",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "get-auth": "npx playwright codegen https://www.powr.io/signin --save-storage=.auth/login.json"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.50.1",
+    "@playwright/test": "^1.51.1",
     "@types/node": "^22.13.9"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
+    "playwright": "^1.51.1",
     "playwright-extra": "^4.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2"
   }

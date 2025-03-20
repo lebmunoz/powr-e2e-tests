@@ -35,11 +35,11 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'setup',
-      use: { ...devices['Desktop Chrome'] },
-      testMatch: /.*\.setup\.ts/,
-    },
+    // {
+    //   name: 'setup',
+    //   use: { ...devices['Desktop Firefox'] },
+    //   testMatch: /.*\.setup\.ts/,
+    // },
 
     {
       name: 'logged-in',
@@ -47,7 +47,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         storageState: '.auth/login.json',
        },
-      dependencies: ['setup'],
+      // dependencies: ['setup'],
     },
 
     // {

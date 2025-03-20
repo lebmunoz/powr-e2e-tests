@@ -3,7 +3,8 @@ import { chromium } from 'playwright-extra';
 import StealthPlugin from "puppeteer-extra-plugin-stealth"
 
 setup('setup login auth data', async ({}) => {
-  const browser: Browser = await chromium.use(StealthPlugin()).launch();
+  chromium.use(StealthPlugin());
+  const browser: Browser = await chromium.launch();
   const context = await browser.newContext();
   const page: Page = await context.newPage();
   
