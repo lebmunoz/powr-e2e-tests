@@ -5,17 +5,20 @@ To run this project on your local machine, clone this project by clicking the gr
 
 You need to have [Node.Js](https://nodejs.org/) installed on your machine. The latest LTS version is preferred.
 
-Then open the Terminal application from your Operating System, and navigate to the folder containing the project. Run the command:
+Then open the Terminal application from your Operating System, and navigate to the folder containing the project. Run the commands:
 
-```
-npm install
-```
+    npm install
+
+And
+
+    npx playwright install
+
+> [!TIP]
+> Depending on your particular machine, you may need to run additional commands. Just keep an eye at any messages shown at the end of the process on your terminal.
 
 After completing the installation, you need to manually enter the login credentials on the platform in order to save the login cookies for all the tests. You can run the following command on the terminal:
 
-```
-npm run get-auth
-```
+    npm run get-auth
 
 The login page will be opened in Chrome, along with a small Playwright window, which you can ignore by now. 
 
@@ -27,9 +30,7 @@ Enter the credentials provided via email (`email` and `password`), click `Log In
 
 After doing this process, you can run the tests using the command:
 
-```
-npx playwright test
-```
+    npx playwright test
 
 The results will be shown on the terminal screen.
 
