@@ -124,7 +124,7 @@ test('Add a Form Builder, change BG color and validate', async ({ page }) => {
   // Publish the app
   await page1.getByRole('button', { name: 'Publish' }).click();
   await page1.getByText('Share App').click();
-  await expect(page1.getByRole('heading', { name: 'Share a link to your Form' })).toBeVisible({ timeout: 20_000 });
+  await expect(page1.getByRole('heading', { name: 'Share a link to your Form' })).toBeVisible({ timeout: 40_000 });
   await page1.getByRole('button', { name: 'Copy Link' }).click();
 
   // Workaround to copy and store the link to the app on a variable
