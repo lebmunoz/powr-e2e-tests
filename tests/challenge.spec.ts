@@ -6,7 +6,10 @@ test('Check Powr pricing page availability', async ({ page }) => {
   await page.locator('.Select-value').click();
   await page.getByLabel('Social Feed').getByText('Social Feed').click();
   await expect(page.getByRole('option', { name: 'Social Feed' })).toBeVisible();
-
+  await expect(async () => {
+    await expect(page.getByRole('heading', { name: 'Social Feed' })).toBeVisible();
+  }).toPass();
+  test.slow();
   // Toggle prices to Monthly
   await page.locator('div:nth-child(3) > .toggle > .toggle__container > .toggle__switcher').click();
 
@@ -17,23 +20,26 @@ test('Check Powr pricing page availability', async ({ page }) => {
     - button "Get Started"
   `);
   
-  await expect(page.getByText('Starter$9.99 /moBilled').nth(2)).toMatchAriaSnapshot(`
+  await expect(page.getByText('Starter$5.49 /moBilled').nth(2)).toBeVisible();
+  await expect(page.getByText('Starter$5.49 /moBilled').nth(2)).toMatchAriaSnapshot(`
     - heading "Starter" [level=3]
-    - heading "$9" [level=4]
-    - heading ".99 /mo" [level=4]
+    - heading "$5" [level=4]
+    - heading ".49 /mo" [level=4]
     - text: Billed monthly
     - button "Select Plan"
   `);
-
-  await expect(page.locator('div').filter({ hasText: /^Pro\$17\.49 \/moBilled monthlySelect PlanPopular$/ }).nth(2)).toMatchAriaSnapshot(`
+  
+  await expect(page.locator('div').filter({ hasText: /^Pro\$13\.49 \/moBilled monthlySelect PlanPopular$/ }).nth(2)).toBeVisible();
+  await expect(page.locator('div').filter({ hasText: /^Pro\$13\.49 \/moBilled monthlySelect PlanPopular$/ }).nth(2)).toMatchAriaSnapshot(`
     - heading "Pro" [level=3]
-    - heading "$17" [level=4]
+    - heading "$13" [level=4]
     - heading ".49 /mo" [level=4]
     - text: Billed monthly
     - button "Select Plan"
     - text: Popular
   `);
 
+  await expect(page.getByText('Business$89.99 /moBilled').nth(2)).toBeVisible();
   await expect(page.getByText('Business$89.99 /moBilled').nth(2)).toMatchAriaSnapshot(`
     - heading "Business" [level=3]
     - heading "$89" [level=4]
@@ -52,6 +58,7 @@ test('Check Powr pricing page availability', async ({ page }) => {
     - button "Get Started"
   `);
 
+  await expect(page.getByText('Starter$5.49/mo$3.29 /').nth(1)).toBeVisible();
   await expect(page.getByText('Starter$5.49/mo$3.29 /').nth(1)).toMatchAriaSnapshot(`
     - heading "Starter" [level=3]
     - text: $5.49/mo
@@ -61,6 +68,7 @@ test('Check Powr pricing page availability', async ({ page }) => {
     - button "Select Plan"
   `);
 
+  await expect(page.locator('div').filter({ hasText: /^Pro\$13\.49\/mo\$8\.09 \/moBilled annuallySelect PlanPopular$/ }).nth(2)).toBeVisible();
   await expect(page.locator('div').filter({ hasText: /^Pro\$13\.49\/mo\$8\.09 \/moBilled annuallySelect PlanPopular$/ }).nth(2)).toMatchAriaSnapshot(`
     - heading "Pro" [level=3]
     - text: $13.49/mo
@@ -70,6 +78,7 @@ test('Check Powr pricing page availability', async ({ page }) => {
     - button "Select Plan"
     - text: Popular
   `);
+  await expect(page.getByText('Business$89.99/mo$53.99 /').nth(1)).toBeVisible();
   await expect(page.getByText('Business$89.99/mo$53.99 /').nth(1)).toMatchAriaSnapshot(`
     - heading "Business" [level=3]
     - text: $89.99/mo
@@ -93,15 +102,24 @@ test('Add a Form Builder, change BG color and validate', async ({ page }) => {
   const page1 = await page1Promise;
 
   // Select the "Start from scratch" template and perform the actions to change the background color
+  await expect(async () => {
+    await expect(page1.getByRole('button', { name: 'Start from scratch' })).toBeVisible({ timeout: 40_000 });
+  }).toPass();
   await page1.getByRole('button', { name: 'Start from scratch' }).click();
+  await expect(page1.getByText('Design')).toBeVisible();
   await page1.getByText('Design').click();
   await expect(page1.getByText('Background & Border')).toBeVisible();
   await page1.getByText('Background & Border').click();
+  await expect(page1.locator('.swatch').first()).toBeVisible();
   await page1.locator('.swatch').first().click();
   await page1.getByRole('textbox').first().fill('#E3F2FD')
   await expect(page1.locator('.current-color > div:nth-child(2)')).toHaveCSS('background-color', 'rgb(227, 242, 253)')
-  await page1.getByRole('button', { name: 'OK' }).click();
+  await expect(async () => {
+    await expect(page1.getByRole('button', { name: 'OK' })).toBeVisible();
+    await page1.getByRole('button', { name: 'OK' }).click();
+  }).toPass();
   await expect(page1.locator('div.formBuilder.formBuilder-v2.formElementsModule.js-form-container.enter_ani_none.none')).toHaveCSS('background-color', 'rgb(227, 242, 253)')
+
 
   // Publish the app
   await page1.getByRole('button', { name: 'Publish' }).click();

@@ -15,6 +15,12 @@ And
 
 > [!TIP]
 > Depending on your particular machine, you may need to run additional commands. Just keep an eye at any messages shown at the end of the process on your terminal.
+> The most common fix will require you to run the command:
+> ```
+> npx playwright install-deps
+> ```
+
+### Running the tests
 
 After completing the installation, you need to manually enter the login credentials on the platform in order to save the login cookies for all the tests. You can run the following command on the terminal:
 
